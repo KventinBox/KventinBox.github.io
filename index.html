@@ -1,33 +1,66 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Elon Husk</title>
-    <link rel="stylesheet" href="styles.css">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Поворот не туда</title>
+    <style>
+        table {
+            width: 40%;
+            margin: 20px auto;
+        }
+        th, td {
+            border: 1px solid rgb(197, 197, 197);
+            padding: 8px;
+        }
+        th {
+            background-color: #a0a0a0;
+        }
+    </style>
 </head>
 <body>
-    <div style="margin: 20px;">
-        <p id="pe1">Абзац незнаю кто</p>
-    <p id="pe2" style="margin-top: 20px;">Абзац незнаю когда</p>
-    <p id="pe3" style="margin-top: 20px;">Абзац незнаю где</p>
-    </div>
+    <style>
+        body {
+            background-color: rgb(58, 58, 58);
+        }
+    </style>
+    <table id="usrTb">
+        <thead>
+            <tr>
+                <th>Чье имя</th>
+                <th>э МАЙЛ</th>
+            </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
 
-    <button class="cs-button">Я меняю что-то</button>
-    <div>
-        <button class="css-button" style="margin-top: 100px; margin-left: 580px;">Смена стиля</button>
-        <p id="pe8" style="margin-top: 20px; margin-left: 600px;">Кто где когда</p>
-    </div>
-
-    <div style="margin-left: 340px;">
-        <img src="img/ig.jpg" class="a">
-        <img src="img/mx.jpg" class="b">
-        <img src="img/one.png" class="c">
-    </div>
-
-
-
-
-    <script src="script.js"></script>
+    <script>
+        fetch('https://jsonplaceholder.typicode.com/users')
+            .then((response) => {
+                if (!response.ok) {
+                    throw new Error('Ошибка сети');
+                }
+                return response.json();
+            })
+            .then((data) => {
+                const tableBody = document.querySelector('#usrTb tbody');
+                data.forEach((user) => {
+                    const rw = document.createElement('tr');
+                    
+                    const name = document.createElement('td');
+                    name.textContent = user.name;
+                    
+                    const email = document.createElement('td');
+                    email.textContent = user.email;
+                    
+                    rw.appendChild(name);
+                    rw.appendChild(email);
+                    tableBody.appendChild(rw);
+                });
+            })
+            .catch((error) => console.error('Ошибка:', error));
+    </script>
 </body>
 </html>
+
